@@ -2,9 +2,12 @@ package com.korayaks.accountservice.service;
 
 import com.korayaks.accountservice.entity.Account;
 
+import java.util.List;
+
 public interface AccountService {
-    public Account get(String id);
-    public Account save(Account account);
-    public Account update(Account account);
-    public void delete(String id);
+     Account get(String id);
+     Account save(Account account);
+     Account update(String id, Account account);
+     void delete(String id);
+     List<Account> getAll();
 }
