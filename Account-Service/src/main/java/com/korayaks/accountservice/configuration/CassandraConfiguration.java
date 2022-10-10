@@ -25,8 +25,6 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
     @Value("${spcloud.cassandra.password}")
     private String password;
 
-    @Value("${spcloud.cassandra.base.packages}")
-    private String basePackages;
 
     @Override
     protected String getKeyspaceName() {
@@ -50,7 +48,7 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[] {basePackages};
+        return new String[] {"com.korayaks.accountservice"};
     }
 
     @Override
