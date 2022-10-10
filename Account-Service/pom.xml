@@ -70,7 +70,7 @@
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <name>haydikodlayalim/${project.artifactId}:${project.version}</name>
+                            <name>korayaks/${project.artifactId}:${project.version}</name>
                             <build>
                                 <from>adoptopenjdk/openjdk11</from>
                                 <entryPoint>
