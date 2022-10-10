@@ -11,12 +11,14 @@
         <module name="config-server" />
         <module name="account-service" />
         <module name="eureka-server" />
+        <module name="Ticket-Service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Account-Service" options="-parameters" />
+      <module name="Ticket-Service" options="-parameters" />
       <module name="account-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
