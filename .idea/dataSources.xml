@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="ce6f911f-447a-4cd1-bfa6-dc709a8beea1">
+    <data-source source="LOCAL" name="cassandra" uuid="8ec73d60-c797-4c7f-a9e7-2f062a31adcf">
       <driver-ref>cassandra</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.CassandraJdbcDriver</jdbc-driver>
       <jdbc-url>jdbc:cassandra://localhost:9042</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="mysql" uuid="10b9cbf0-e87f-4da0-afb0-e6c4dfcd6bcb">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/microserviceapp</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
