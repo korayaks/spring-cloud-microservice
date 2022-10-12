@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: ticket-service
+    name: notification-service
 
   cloud:
     config:
@@ -9,5 +9,6 @@ spring:
       uri: http://localhost:8888
     stream:
       bindings:
-        output:
+        input:
           destination: msqueue
+

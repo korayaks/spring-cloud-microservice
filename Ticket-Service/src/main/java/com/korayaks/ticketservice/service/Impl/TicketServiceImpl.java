@@ -9,6 +9,7 @@ import com.korayaks.ticketservice.model.TicketStatus;
 import com.korayaks.ticketservice.model.elasticsearch.TicketModel;
 import com.korayaks.ticketservice.repository.TicketRepository;
 import com.korayaks.ticketservice.repository.elasticsearch.TicketElasticRepository;
+import com.korayaks.ticketservice.service.TicketNotificationService;
 import com.korayaks.ticketservice.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TicketServiceImpl implements TicketService {
     private final TicketElasticRepository ticketElasticRepository;
     private final TicketRepository ticketRepository;
-    private final ModelMapper modelMapper;
+    private final TicketNotificationService ticketNotificationService;
     private final AccountServiceClient accountServiceClient;
     @Override
     @Transactional
@@ -39,6 +40,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTicketStatus(TicketStatus.valueOf(ticketDto.getTicketStatus()));
         ticket.setPriorityType(PriorityType.valueOf(ticketDto.getPriorityType()));
         ticket.setAssignee(accountDtoResponseEntity.getBody().getId());
+        //mysqle kaydet
         ticket = ticketRepository.save(ticket);
 
 
@@ -49,8 +51,13 @@ public class TicketServiceImpl implements TicketService {
                                     .priorityType(ticket.getPriorityType().getLabel())
                                     .ticketStatus(ticket.getTicketStatus().getLabel())
                                     .ticketDate(ticket.getTicketDate()).build();
+        //elastice kaydet
         ticketElasticRepository.save(ticketModel);
 
+
+        //kuyruğa yolla
+        ticketNotificationService.sendToQueue(ticket);
+        //nesneyi döndür
         ticketDto.setId(ticket.getId());
         return ticketDto;
     }

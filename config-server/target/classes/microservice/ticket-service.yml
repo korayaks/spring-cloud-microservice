@@ -15,6 +15,14 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    username: korayaks
+    password: korayaks
+    cloud:
+      stream:
+        binding:
+          output:
+            destination: msqueue
 
 eureka:
   client:
