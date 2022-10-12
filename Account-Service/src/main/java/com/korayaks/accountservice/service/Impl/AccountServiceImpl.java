@@ -1,10 +1,10 @@
 package com.korayaks.accountservice.service.Impl;
 
-import com.korayaks.accountservice.dto.AccountDto;
 import com.korayaks.accountservice.entity.Account;
 import com.korayaks.accountservice.repository.AccountRepository;
 import com.korayaks.accountservice.service.AccountService;
 
+import com.korayaks.client.contract.AccountDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor

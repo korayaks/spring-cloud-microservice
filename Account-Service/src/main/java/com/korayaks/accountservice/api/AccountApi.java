@@ -1,16 +1,12 @@
 package com.korayaks.accountservice.api;
 
-import com.korayaks.accountservice.dto.AccountDto;
-import com.korayaks.accountservice.entity.Account;
 import com.korayaks.accountservice.service.AccountService;
+import com.korayaks.client.contract.AccountDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController

@@ -1,11 +1,8 @@
 package com.korayaks.accountservice.service;
 
-import com.korayaks.accountservice.dto.AccountDto;
-import com.korayaks.accountservice.entity.Account;
+import com.korayaks.client.contract.AccountDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-
-import java.util.List;
 
 public interface AccountService {
      AccountDto get(String id);

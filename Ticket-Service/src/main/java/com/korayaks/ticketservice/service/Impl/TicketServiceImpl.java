@@ -1,5 +1,7 @@
 package com.korayaks.ticketservice.service.Impl;
 
+import com.korayaks.client.AccountServiceClient;
+import com.korayaks.client.contract.AccountDto;
 import com.korayaks.ticketservice.dto.TicketDto;
 import com.korayaks.ticketservice.model.PriorityType;
 import com.korayaks.ticketservice.model.Ticket;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,10 +24,12 @@ public class TicketServiceImpl implements TicketService {
     private final TicketElasticRepository ticketElasticRepository;
     private final TicketRepository ticketRepository;
     private final ModelMapper modelMapper;
+    private final AccountServiceClient accountServiceClient;
     @Override
     @Transactional
     public TicketDto save(TicketDto ticketDto) {
         Ticket ticket = new Ticket();
+        ResponseEntity<AccountDto> accountDtoResponseEntity = accountServiceClient.get(ticketDto.getAssignee());
 
         if(ticketDto.getDescription() == null)
             throw new IllegalArgumentException("Description bos olmamali");
@@ -33,11 +38,14 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTicketDate(ticketDto.getTicketDate());
         ticket.setTicketStatus(TicketStatus.valueOf(ticketDto.getTicketStatus()));
         ticket.setPriorityType(PriorityType.valueOf(ticketDto.getPriorityType()));
+        ticket.setAssignee(accountDtoResponseEntity.getBody().getId());
         ticket = ticketRepository.save(ticket);
+
 
         TicketModel ticketModel = TicketModel.builder().description(ticket.getDescription())
                                     .notes(ticket.getNotes())
                                     .id(ticket.getId())
+                                    .assignee(accountDtoResponseEntity.getBody().getNameSurname())
                                     .priorityType(ticket.getPriorityType().getLabel())
                                     .ticketStatus(ticket.getTicketStatus().getLabel())
                                     .ticketDate(ticket.getTicketDate()).build();
